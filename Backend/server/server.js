@@ -19,9 +19,10 @@ const startServer = async () => {
         if (process.env.NODE_ENV === 'production') {
           console.error(`[Error] Port ${port} is in use. In production, this is fatal.`);
           process.exit(1);
+        } else {
+          console.warn(`[Warning] Port ${port} is in use, trying port ${port + 1}...`);
+          listenWithFallback(port + 1);
         }
-        console.warn(`[Warning] Port ${port} is in use, trying port ${port + 1}...`);
-        listenWithFallback(port + 1);
       } else {
         console.error('Server error:', error);
         process.exit(1);
