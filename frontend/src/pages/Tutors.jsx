@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { bookTutorSession } from '../services/api';
-import axios from 'axios';
+import api, { bookTutorSession } from '../services/api';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
@@ -21,7 +20,7 @@ const Tutors = () => {
   useEffect(() => {
     const fetchTutors = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/tutors');
+        const { data } = await api.get('/tutors');
         setTutors(data.data || data);
       } catch (error) {
         console.error('Failed to load tutors:', error);

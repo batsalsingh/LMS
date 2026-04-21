@@ -1,16 +1,42 @@
-# React + Vite
+# LuminEd Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Vite + React frontend for the LMS platform.
 
-Currently, two official plugins are available:
+## Environment Variables
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Create a `.env` file in this folder:
 
-## React Compiler
+```bash
+cp .env.example .env
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Required variables:
 
-## Expanding the ESLint configuration
+- `VITE_API_URL`: Base URL for backend API, including `/api`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Local example: `http://localhost:5000/api`
+
+Render example: `https://<your-backend-service>.onrender.com/api`
+
+Optional variables:
+
+- `VITE_UNSPLASH_ACCESS_KEY`: Unsplash image API access key
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Production Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Render Deployment Note
+
+Set `VITE_API_URL` in the Render frontend service Environment settings before deploy.
+If this variable is missing, production falls back to `/api` (same-origin), which only works if the frontend and backend are served from the same host.

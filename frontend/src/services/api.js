@@ -1,9 +1,23 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const normalizeBaseUrl = (url) => url.replace(/\/+$/, '');
+
+const resolveApiUrl = () => {
+  const envApiUrl = import.meta.env.VITE_API_URL?.trim();
+  if (envApiUrl) {
+    return normalizeBaseUrl(envApiUrl);
+  }
+
+  if (import.meta.env.DEV) {
+    return 'http://localhost:5000/api';
+  }
+
+  // In production, default to same-origin API path if VITE_API_URL is not configured.
+  return '/api';
+};
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: resolveApiUrl(),
 });
 
 api.interceptors.request.use((config) => {
